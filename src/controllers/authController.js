@@ -79,7 +79,7 @@ module.exports.auth = {
 
     if (req?.file) {
       req.body.profilePic =
-        "http://localhost:8000/api/pics/" + req.file.filename;
+        process.env.FRONT_HOST+"/api/pics/" + req.file.filename;
     } else {
       req.body.gender === "male"
         ? (req.body.profilePic = `https://avatar.iran.liara.run/public/boy?username=${username}`)
