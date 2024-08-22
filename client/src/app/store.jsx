@@ -16,17 +16,20 @@ import authSlice from "../features/authSlice";
 import conversationSlice from "../features/conversationSlice";
 import { persistStore, persistReducer } from "redux-persist";
 import storage from "redux-persist/lib/storage"; // defaults to localStorage for web
-import messageSlice from "../features/messageSlice";
+import messageSlice from "../features/messageSlice"; 
+//import socketSlice from "../features/socketSlice";
 
 const rootReducer = combineReducers({
   auth: authSlice,
   conv: conversationSlice,
-  message: messageSlice,
+  message: messageSlice, 
+  //socket: socketSlice, 
 });
 const persistConfig = {
   key: "rootchatapp",
   storage,
   version: 1,
+  //blacklist: ['socket']
 };
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);

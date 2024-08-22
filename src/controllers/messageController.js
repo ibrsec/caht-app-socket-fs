@@ -8,7 +8,8 @@ const passwordEncryptor = require("../helpers/passwordEncryptor");
 const { User } = require("../models/userModel");
 const { Message } = require("../models/messageModel");
 const generateToken = require("../helpers/generateToken");
-const { Conversation } = require("../models/conversationModel");
+const { Conversation } = require("../models/conversationModel"); 
+const { getRecieverSocketId,io } = require("../../socket/socket");
 
 module.exports.message = {
   send: async (req, res) => {
@@ -105,9 +106,25 @@ module.exports.message = {
     conversation.messages.push(newMessage._id);
 
 
+
+
+
+
     // await conversation.save();
     // await newMessage.save();
         await Promise.all([conversation.save(),newMessage.save()])
+
+
+
+    //SOCKET.IO FUNCtionality
+    const recieverSocketId = getRecieverSocketId(recieverId)
+    if(recieverSocketId){
+      io.to(recieverSocketId).emit('newMessage',newMessage);
+    }
+
+
+
+
     res.status(201).json({
       error: false,
       message: "A new message is sended!",

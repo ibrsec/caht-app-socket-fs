@@ -1,6 +1,7 @@
-import { useEffect, useState } from "react";
+ 
 import { useDispatch, useSelector } from "react-redux";
 import { selectedConvSuccess } from "../../features/conversationSlice";
+import { useSocketContext } from "../../context/SocketContext";
 
 const Conversation = ({ item, lastIndex, emoji }) => {
   const { fullName, profilePic } = item;
@@ -9,6 +10,11 @@ const Conversation = ({ item, lastIndex, emoji }) => {
   );
   const dispatch = useDispatch();
   const isSelected = selectedConversation?._id === item?._id; 
+
+
+
+    const {onlineUsers} = useSocketContext(); 
+    const isOnline = onlineUsers?.includes(item?._id); 
   return (
     <div>
       <div
@@ -17,7 +23,7 @@ const Conversation = ({ item, lastIndex, emoji }) => {
         }`}
         onClick={() => dispatch(selectedConvSuccess(item))}
       >
-        <div className="avatar online ">
+        <div className={`avatar ${isOnline ? 'online': ''}`}>
           <div className="w-12 rounded-full">
             <img src={profilePic} alt="user avatar" />
           </div>

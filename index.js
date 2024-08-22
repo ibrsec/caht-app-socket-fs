@@ -1,9 +1,9 @@
 "use strict";
 
 /* --------------------------------- imports -------------------------------- */
+const express = require("express");
 require("dotenv").config();
 require("express-async-errors");
-const express = require("express");
 const { dbConnection } = require("./src/configs/dbConnection");
 const logger = require("./src/middlewares/logger");
 const errorHandler = require("./src/middlewares/errorHandler");
@@ -11,11 +11,12 @@ const cors = require("cors");
 const queryHandler = require("./src/middlewares/queryHandler");
 const path = require("path");
 const cookieParser =require('cookie-parser');
+const { app, server } = require("./socket/socket");
 // const userDataSync = require("./src/helpers/userDataSync");
 // const adminUser = require("./src/helpers/adminUser");
 
 /* ------------------------------- Express app ------------------------------ */
-const app = express();
+
 const PORT = process.env.PORT;
 
 /* ------------------------------ dbconnection ------------------------------ */
@@ -96,7 +97,7 @@ app.get('*', (req, res) => {
 app.use(errorHandler);
 
 /* ----------------------------------- RUN ---------------------------------- */
-app.listen(PORT, () => console.log("Server is running on:", PORT));
+server.listen(PORT, () => console.log("Server is running on:", PORT));
 
 // clean and add user data
 // userDataSync()

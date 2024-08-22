@@ -1,12 +1,11 @@
 import { useDispatch } from "react-redux";
 import useAxios from "./useAxios";   
 import { hotToastError } from "../helper/hotToast";
-import { fetchMessageFail, fetchMessageStart, messagesSuccess, successWitoutPayload } from "../features/messageSlice";
+import { fetchMessageFail, fetchMessageStart, messagesSuccess, sendMessageSuccess,  } from "../features/messageSlice"; 
 
 const useMessageRequests = () => {
   const { axiosToken } = useAxios();
-  const dispatch = useDispatch(); 
-
+  const dispatch = useDispatch();  
   const getMessagesApi = async (recieverId) => {
     try {
       dispatch(fetchMessageStart());
@@ -38,10 +37,10 @@ const useMessageRequests = () => {
       dispatch(fetchMessageStart());
       const { data } = await axiosToken.post("/messages/send/"+recieverId,{message});
       console.log(`sendMessageApi = `, data);
-      dispatch(successWitoutPayload());
-      getMessagesApi(recieverId);
-    } catch (error) {
-      // toastErrorNotify("Error! Couldn't Get Firms");
+      dispatch(sendMessageSuccess(data?.newMessage));
+
+ 
+    } catch (error) { 
       hotToastError(
         "Error! Message couldn't be sended!" +
           " - " +
@@ -57,7 +56,8 @@ const useMessageRequests = () => {
     //   }
     }
   };
-
+  
+ 
 
 
 
@@ -183,7 +183,7 @@ const useMessageRequests = () => {
   // };
 
   return {
-    getMessagesApi, sendMessageApi
+    getMessagesApi, sendMessageApi,  
   };
 };
 

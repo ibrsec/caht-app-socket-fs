@@ -1,7 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
-  messages: null,
+  messages: [],
   loading: false,
   error: false,
 };
@@ -18,6 +18,14 @@ const messageSlice = createSlice({
       state.loading = false;
       state.messages = payload;
     },
+    sendMessageSuccess: (state, { payload }) => {
+      state.loading = false;
+      state.messages = [...state.messages, payload];
+    },
+    listenMessages: (state, { payload }) => {
+      state.loading = false;
+      state.messages = [...state.messages, payload];
+    }, 
     successWitoutPayload: (state) => {
       state.loading = false;
     },
@@ -37,5 +45,7 @@ export const {
   messagesSuccess,
   successWitoutPayload,
   deleteMessageLogout,
+  listenMessages,
+  sendMessageSuccess,
 } = messageSlice.actions;
 export default messageSlice.reducer;

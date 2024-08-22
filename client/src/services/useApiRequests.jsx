@@ -4,7 +4,7 @@ import {
   toastSuccessNotify,
   toastWarnNotify,
 } from "../helper/ToastNotify";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import {
   fetchLoginFail,
   fetchLoginStart,
@@ -17,11 +17,18 @@ import useAxios from "./useAxios";
 import { deleteConvLogout, deleteStockLogout } from "../features/conversationSlice";
 import { hotToastError, hotToastSuccess } from "../helper/hotToast";
 import { deleteMessageLogout } from "../features/messageSlice";
+import { useEffect } from "react";
+import useSocket from "./useSocket";
 
 const useApiRequests = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 const {axiosToken,axiosPublic} = useAxios();
+
+
+const user = useSelector(state => state.auth.user)
+const {socketApi} = useSocket();
+
 
   const loginApi = async (userData) => {     
      
@@ -34,6 +41,9 @@ const {axiosToken,axiosPublic} = useAxios();
       console.log("loginapiden = ",data);
       dispatch(loginSuccess(data));
       hotToastSuccess(data?.message);
+
+        
+
       navigate("/");
 
     } catch (error) {
@@ -67,6 +77,8 @@ const {axiosToken,axiosPublic} = useAxios();
         "Congratulations, your account has been successfully created - "+data?.message
       );
       dispatch(registerSuccess(data));
+
+       
       navigate("/");
     } catch (error) {
       dispatch(fetchLoginFail());
@@ -100,6 +112,10 @@ const {axiosToken,axiosPublic} = useAxios();
       dispatch(deleteMessageLogout());
       // dispatch(deleteStockLogout());
       hotToastSuccess("You have been logged out!");
+
+       
+       
+
       // navigate("/");
     } catch (error) {
       hotToastError("Log out failed!!");

@@ -82,10 +82,11 @@ module.exports.auth = {
         "http://localhost:8000/api/pics/" + req.file.filename;
     } else {
       req.body.gender === "male"
-        ? (req.body.profilePic = "https://avatar.iran.liara.run/public/boy")
-        : (req.body.profilePic = "https://avatar.iran.liara.run/public/girl");
+        ? (req.body.profilePic = `https://avatar.iran.liara.run/public/boy?username=${username}`)
+        : (req.body.profilePic = `https://avatar.iran.liara.run/public/girl?username=${username}`);
     }
 
+    // Check if user already exists
     const newUser = await User.create(req.body);
     if (newUser) {
       await newUser.save();

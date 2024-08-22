@@ -49,6 +49,7 @@ const conversationSlice = createSlice({
     deleteConvLogout: (state) => {
       state.conversations = [];
       state.selectedConversation = [];
+      state.searchActive = false;
     },
     // stockPromiseAllSuccess: (state, { payload: { paths, datas } }) => {
     // state.loading = false;

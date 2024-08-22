@@ -3,6 +3,7 @@ import Message from './Message'
 import useMessageRequests from '../../services/useMessageRequests'
 import { useSelector } from 'react-redux'
 import MessageSkeleton from '../skeletons/MessageSkeleton'
+import useListenMessages from '../../services/useListenMessages'
 
 const Messages = ({recieverId}) => {
   const {getMessagesApi} =useMessageRequests()
@@ -22,6 +23,7 @@ const Messages = ({recieverId}) => {
     getMessagesApi(recieverId)
   },[recieverId])
 
+  useListenMessages();
 
   return (
     <div className='px-4 flex-1 overflow-auto'>
@@ -33,12 +35,12 @@ const Messages = ({recieverId}) => {
         <MessageSkeleton />
         </>
         :
-        messages.length < 1 ?
+        messages?.length < 1 ?
         <p className='text-center text-sm my-4'>Send a message to start a conversation!</p>
         :
-        messages?.map(message=>{
+        messages?.map((message,idx)=>{
           return <div key={message?._id} ref={lastMessageRef}>
-            <Message  message={message} />
+            <Message  message={message} isLastIdx={idx == messages.length - 1 ? true :false} />
           </div>
 
         })

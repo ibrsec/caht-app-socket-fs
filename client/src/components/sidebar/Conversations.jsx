@@ -12,8 +12,7 @@ const Conversations = () => {
   useEffect(() => {
     getConversationsApi();
   }, []);
-
-  console.log("document.cookie", document.cookie);
+ 
   return (
     <div className="py-2 flex flex-col overflow-auto">
       {

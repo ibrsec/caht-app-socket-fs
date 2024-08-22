@@ -34,9 +34,9 @@ module.exports.user = {
     let customFilters = {_id:{ $ne: loggedUserId}}
 
     const allUsers = await res.getModelList(User, customFilters);
-    console.log('customFilters', customFilters)
 
-console.log('allUsers', allUsers)
+
+
 
     // let customFilters = { isAdmin: false, isStaff: false };
     // if (req.user?.isAdmin) {

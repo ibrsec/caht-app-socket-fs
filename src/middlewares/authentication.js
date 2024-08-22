@@ -14,8 +14,7 @@ module.exports = async (req, res, next) => {
       const tokenKey = authHeader.split(" ")[1];
       if (tokenKey) {
         jwt.verify(tokenKey, process.env.ACCESS_KEY, (err, decoded) => {
-          if (!err) {
-            console.log(decoded);
+          if (!err) { 
             req.user = {
               _id: decoded?._id,
               username: decoded?.username,
