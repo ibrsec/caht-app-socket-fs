@@ -13,16 +13,18 @@
 
 import { combineReducers, configureStore } from "@reduxjs/toolkit";
 import authSlice from "../features/authSlice";
-import storeSlice from "../features/stockSlice";
+import conversationSlice from "../features/conversationSlice";
 import { persistStore, persistReducer } from "redux-persist";
 import storage from "redux-persist/lib/storage"; // defaults to localStorage for web
+import messageSlice from "../features/messageSlice";
 
 const rootReducer = combineReducers({
   auth: authSlice,
-  stock: storeSlice,
+  conv: conversationSlice,
+  message: messageSlice,
 });
 const persistConfig = {
-  key: "root",
+  key: "rootchatapp",
   storage,
   version: 1,
 };

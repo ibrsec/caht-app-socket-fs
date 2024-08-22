@@ -49,6 +49,11 @@
         "description": "  Login with username/email and password!</br></br>  <b>Permission= No Permission</b></br></br>  - Password type Rules- [lenght:8-16, at least: 1 upper, 1 lower, 1 number, 1 special[@$!%*?&]]</br>  - Email type Rules- --@--.--</br>  - Required fields: - fullName, username, email, password, confirmedPassword, gender</br>  - Gender is enum: - male, - female</br>  - if user sends a image with upload it returns, else a random pic returns</br>   ",
         "parameters": [
           {
+            "name": "authorization",
+            "in": "header",
+            "type": "string"
+          },
+          {
             "name": "body",
             "in": "body",
             "required": true,
@@ -146,6 +151,11 @@
         "description": "  Login with username/email and password!</br></br>  <b>Permission= No Permission</b></br></br>  - Password type Rules- [lenght:8-16, at least: 1 upper, 1 lower, 1 number, 1 special[@$!%*?&]]</br>  - Email type Rules- --@--.--</br>  - Required fields: - username or email,password</br>  ",
         "parameters": [
           {
+            "name": "authorization",
+            "in": "header",
+            "type": "string"
+          },
+          {
             "name": "body",
             "in": "body",
             "required": true,
@@ -187,6 +197,19 @@
                   "type": "string",
                   "example": "Login is OK!"
                 },
+                "bearer": {
+                  "type": "object",
+                  "properties": {
+                    "accessToken": {
+                      "type": "string",
+                      "example": "access token"
+                    },
+                    "refreshToken": {
+                      "type": "string",
+                      "example": "refresh token"
+                    }
+                  }
+                },
                 "user": {
                   "type": "object",
                   "properties": {
@@ -223,6 +246,82 @@
         }
       }
     },
+    "/api/auth/refresh": {
+      "post": {
+        "tags": [
+          "Authentication"
+        ],
+        "summary": "Refresh token",
+        "description": "   Refresh the access token with refresh token!</br></br>   <b>Permission= No Permission</b></br></br>   - Required fields: - bearer. refresh Token</br>  ",
+        "parameters": [
+          {
+            "name": "authorization",
+            "in": "header",
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "bearer": {
+                  "type": "object",
+                  "properties": {
+                    "refresh Token": {
+                      "type": "string",
+                      "example": "...refresh token"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully  !",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "error": {
+                  "type": "boolean",
+                  "example": false
+                },
+                "message": {
+                  "type": "string",
+                  "example": "Access token is  !!"
+                },
+                "result": {
+                  "type": "object",
+                  "properties": {
+                    "bearer": {
+                      "type": "object",
+                      "properties": {
+                        "accessToken": {
+                          "type": "string",
+                          "example": "access token"
+                        }
+                      }
+                    }
+                  }
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
+            }
+          },
+          "400": {
+            "description": "Bad request - bearer.refreshToken is a required field!"
+          },
+          "401": {
+            "description": "Unauthorized:   </br>- Unauhtorized - Invalid signature - invalid token or token is expired!!   </br>- Unauhtorized - Your account is not active - please contact with support!!!   </br>- User not found!   </br>- Invalid password!   "
+          }
+        }
+      }
+    },
     "/api/auth/logout": {
       "get": {
         "tags": [
@@ -230,6 +329,13 @@
         ],
         "summary": "Logout",
         "description": "    <b>Permission= No Permission</b></br></br>  ",
+        "parameters": [
+          {
+            "name": "authorization",
+            "in": "header",
+            "type": "string"
+          }
+        ],
         "responses": {
           "200": {
             "description": "Successfully Logged out!",
@@ -268,6 +374,11 @@
             "type": "string"
           },
           {
+            "name": "authorization",
+            "in": "header",
+            "type": "string"
+          },
+          {
             "name": "body",
             "in": "body",
             "required": true,
@@ -299,7 +410,7 @@
                   "type": "string",
                   "example": "A new message is sended!"
                 },
-                "user": {
+                "newMessage": {
                   "$ref": "#/definitions/Message"
                 }
               },
@@ -327,6 +438,11 @@
             "in": "path",
             "required": true,
             "type": "string"
+          },
+          {
+            "name": "authorization",
+            "in": "header",
+            "type": "string"
           }
         ],
         "responses": {
@@ -343,7 +459,7 @@
                   "type": "string",
                   "example": "Messages are listed"
                 },
-                "user": {
+                "messages": {
                   "$ref": "#/definitions/Message"
                 }
               },
@@ -365,6 +481,13 @@
         ],
         "summary": "List Users",
         "description": "  List all users except who asks!</br></br>  <b>Permission= Loginned user</b></br>   You can send query with endpoint for filter[],search[], sort[], page and limit.  <ul> Examples:   <li>URL/?<b>filter[field1]=value1&filter[field2]=value2</b></li>   <li>URL/?<b>search[field1]=value1&search[field2]=value2</b></li>   <li>URL/?<b>sort[field1]=1&sort[field2]=-1</b></li>   <li>URL/?<b>page=2&limit=1</b></li>  </ul>  ",
+        "parameters": [
+          {
+            "name": "authorization",
+            "in": "header",
+            "type": "string"
+          }
+        ],
         "responses": {
           "200": {
             "description": "OK"

@@ -14,7 +14,9 @@ import {
 } from "../features/authSlice";
 import { useNavigate } from "react-router-dom";
 import useAxios from "./useAxios";
-import { deleteStockLogout } from "../features/stockSlice";
+import { deleteConvLogout, deleteStockLogout } from "../features/conversationSlice";
+import { hotToastError, hotToastSuccess } from "../helper/hotToast";
+import { deleteMessageLogout } from "../features/messageSlice";
 
 const useApiRequests = () => {
   const dispatch = useDispatch();
@@ -26,27 +28,29 @@ const {axiosToken,axiosPublic} = useAxios();
     dispatch(fetchLoginStart());
     try {
       // const { data } = await axios.post(`${BASE_URL}/auth/login`, userData);
-      const { data } = await axiosPublic.post(`/auth/login`, userData);
+      const {data} = await axiosPublic.post(`/auth/login`, userData);
+      // aA*12345 
 
       console.log("loginapiden = ",data);
       dispatch(loginSuccess(data));
-      toastSuccessNotify(data?.message);
-      navigate("/stock"); 
+      hotToastSuccess(data?.message);
+      navigate("/");
+
     } catch (error) {
-      toastErrorNotify("Login is failed!! - "+error?.response?.data?.message);
+      hotToastError("Login is failed!! - "+error?.response?.data?.message);
       dispatch(fetchLoginFail());
       console.log(error);
     }
   };
 
   const registerApi = async (userData) => {
-    // {
-    //     "username": "test",
-    //     "password": "1234",
-    //     "email": "test@site.com",
-    //     "firstName": "test",
-    //     "lastName": "test"
-    //   }
+    // username: "",
+    // email: "",
+    // fullName: "",
+    // password: "",
+    // confirmedPassword: "",
+    // gender: "",
+    //image
 
     dispatch(fetchLoginStart());
     try {
@@ -55,20 +59,20 @@ const {axiosToken,axiosPublic} = useAxios();
       //   userData
       // );
       const { data } = await axiosPublic.post(
-        `/users`,
+        `/auth/signup`,
         userData
       );
       console.log("registerApiden = ",data);
-      toastSuccessNotify(
+      hotToastSuccess(
         "Congratulations, your account has been successfully created - "+data?.message
       );
       dispatch(registerSuccess(data));
-      navigate("/stock");
+      navigate("/");
     } catch (error) {
       dispatch(fetchLoginFail());
-      toastErrorNotify("Something went wrong. Registration failed!!");
+      hotToastError("Something went wrong. Registration failed!!");
       console.log(error);
-      toastWarnNotify(error.response.data.message);
+      hotToastError(error.response.data.message);
       console.log(error.response.data.message);
     }
   };
@@ -92,11 +96,13 @@ const {axiosToken,axiosPublic} = useAxios();
       const response = await axiosToken(`/auth/logout`);
       console.log("loginoutApiden = ",response);
       dispatch(logoutSuccess());
-      dispatch(deleteStockLogout());
-      toastSuccessNotify("You have been logged out!");
-      navigate("/");
+      dispatch(deleteConvLogout());
+      dispatch(deleteMessageLogout());
+      // dispatch(deleteStockLogout());
+      hotToastSuccess("You have been logged out!");
+      // navigate("/");
     } catch (error) {
-      toastErrorNotify("Log out failed!!");
+      hotToastError("Log out failed!!");
       dispatch(fetchLoginFail());
       console.log(error);
     }

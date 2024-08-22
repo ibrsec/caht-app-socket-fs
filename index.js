@@ -26,7 +26,10 @@ dbConnection();
 //customError ok,swagger ok,redoc ok ,authentication,permission,query handler, notfound route
 
 //cors
-app.use(cors());
+app.use(cors({
+  origin: 'http://localhost:3000', // Frontend'in çalıştığı domain
+    credentials: 'include'
+}));
 
 app.use(express.json());
 app.use(cookieParser());
@@ -36,7 +39,7 @@ app.use(express.static(path.resolve(__dirname, "./public")));
 app.use(logger);
 
 // authentication
-// app.use(require("./src/middlewares/protectedRoute"));
+app.use(require("./src/middlewares/authentication"));
 
 //query handler
 app.use(queryHandler);

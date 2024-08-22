@@ -8,12 +8,12 @@
 const router = require('express').Router()
 const {message} = require('../controllers/messageController');
 const upload = require('../middlewares/upload');
-const protectedRoute = require('../middlewares/protectedRoute');
+const permission = require('../middlewares/permissions');
 /* -------------------------------------------------------------------------- */
 
 
-router.post('/send/:id',protectedRoute,message.send) ;
-router.get('/:id',protectedRoute,message.getMessages) ;
+router.post('/send/:id',permission.isLogin,message.send) ;
+router.get('/:id',permission.isLogin,message.getMessages) ;
  
 
 

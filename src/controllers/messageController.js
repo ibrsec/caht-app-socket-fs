@@ -35,7 +35,7 @@ module.exports.message = {
             schema: { 
                 error: false,
                 message: "A new message is sended!",
-                user: {$ref: '#/definitions/Message'} 
+                newMessage: {$ref: '#/definitions/Message'} 
             }
 
         }  
@@ -131,7 +131,7 @@ module.exports.message = {
             schema: { 
                 error: false,
                 message: "Messages are listed",
-                user: {$ref: '#/definitions/Message'} 
+                messages: {$ref: '#/definitions/Message'} 
             }
 
         }  

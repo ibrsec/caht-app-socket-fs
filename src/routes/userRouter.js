@@ -7,10 +7,10 @@
 
 const router = require('express').Router()
 const {user} = require('../controllers/userController');
-const protectedRoute = require('../middlewares/protectedRoute');
+const permission = require('../middlewares/permissions');
 /* -------------------------------------------------------------------------- */
 
-router.get('/', protectedRoute,user.getusersForSideBar);
+router.get('/', permission.isLogin,user.getusersForSideBar);
 
 
 
