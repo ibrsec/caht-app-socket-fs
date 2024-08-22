@@ -11,7 +11,7 @@ const useSocket = () => {
   const socketApi = async (recieverId) => {
     try {
       if (user) {
-        const socket = io("http://localhost:8000", {
+        const socket = io("https://chat-app-socket-fs.onrender.com/", {
           query: {
             userId: user._id, 
           }
