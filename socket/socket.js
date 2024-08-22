@@ -1,5 +1,6 @@
 "use strict";
 
+require("dotenv").config();
 const { Server } = require("socket.io");
 const http = require("http");
 
@@ -9,7 +10,7 @@ const app = express();
 const server = http.createServer(app);
 const io = new Server(server, {
   cors: {
-    origin: "http://localhost:3000",
+    origin: process.env.FRONT_HOST,
     methods: ["GET", "POST"],
   },
 });

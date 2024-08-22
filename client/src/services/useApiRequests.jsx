@@ -53,7 +53,7 @@ const {socketApi} = useSocket();
     }
   };
 
-  const registerApi = async (userData) => {
+  const registerApi = async (formPayload) => {
     // username: "",
     // email: "",
     // fullName: "",
@@ -70,7 +70,11 @@ const {socketApi} = useSocket();
       // );
       const { data } = await axiosPublic.post(
         `/auth/signup`,
-        userData
+        formPayload,{
+          headers: {
+            "Content-Type": "multipart/form-data",
+          },
+        }
       );
       console.log("registerApiden = ",data);
       hotToastSuccess(
@@ -105,7 +109,7 @@ const {socketApi} = useSocket();
       //     },
       //   }
       // );
-      const response = await axiosToken(`/auth/logout`);
+      const response = await axiosPublic(`/auth/logout`);
       console.log("loginoutApiden = ",response);
       dispatch(logoutSuccess());
       dispatch(deleteConvLogout());

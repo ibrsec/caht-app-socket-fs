@@ -5,7 +5,7 @@ import GenderCheckbox from "../components/register/GenderCheckbox";
 import { hotToastError } from "../helper/hotToast";
 import { passwordValidation } from "../helper/passwordValidator";
 import useApiRequests from "../services/useApiRequests";
-import { useSelector } from "react-redux";
+import { useSelector } from "react-redux"; 
 const Register = () => {
   const { registerApi } = useApiRequests();
 
@@ -17,13 +17,31 @@ const Register = () => {
     password: "",
     confirmedPassword: "",
     gender: "",
-  });
+    image: null,
+  }); 
+
+
+
+ 
+
+  
+
+
+
   const handleChange = (e) => {
+    const { name, value, files } = e.target;
     setInputs({
       ...inputs,
-      [e.target.name]: e.target.value,
+      [name]: files ? files[0] : value, // Dosya seçildiyse `files` kullanılır
     });
   };
+
+  // const handleChange = (e) => {
+  //   setInputs({
+  //     ...inputs,
+  //     [e.target.name]: e.target.value,
+  //   });
+  // };
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -54,7 +72,14 @@ const Register = () => {
       return;
     }
 
-    registerApi(inputs);
+    
+    const formPayload = new FormData();
+    for (let key in inputs) {
+      formPayload.append(key, inputs[key]);
+    }
+
+
+    registerApi(formPayload);
     setInputs({
       username: "",
       email: "",
@@ -62,6 +87,7 @@ const Register = () => {
       password: "",
       confirmedPassword: "",
       gender: "",
+      image: null,
     });
   };
 
@@ -153,7 +179,7 @@ h-full w-full p-6 bg-pink-800 rounded-lg bg-clip-padding backdrop-filter backdro
             </label>
             <label htmlFor="image" className="form-control w-full max-w-xs">
               <div className="label">
-                <span className="text-base label-text">Image</span>
+                <span className="text-base label-text">Image(not required)</span>
               </div>
               <input
                 id="image"
@@ -161,6 +187,7 @@ h-full w-full p-6 bg-pink-800 rounded-lg bg-clip-padding backdrop-filter backdro
                 type="file"
                 placeholder="Image"
                 className="input input-bordered input-accent w-full max-w-xs"
+                onChange={handleChange}
               />
             </label>
             <GenderCheckbox inputs={inputs} setInputs={setInputs} />

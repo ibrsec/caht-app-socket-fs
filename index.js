@@ -1,6 +1,7 @@
 "use strict";
 
 /* --------------------------------- imports -------------------------------- */
+const path = require("path");
 const express = require("express");
 require("dotenv").config();
 require("express-async-errors");
@@ -8,8 +9,7 @@ const { dbConnection } = require("./src/configs/dbConnection");
 const logger = require("./src/middlewares/logger");
 const errorHandler = require("./src/middlewares/errorHandler");
 const cors = require("cors");
-const queryHandler = require("./src/middlewares/queryHandler");
-const path = require("path");
+const queryHandler = require("./src/middlewares/queryHandler"); 
 const cookieParser =require('cookie-parser');
 const { app, server } = require("./socket/socket");
 // const userDataSync = require("./src/helpers/userDataSync");
@@ -26,11 +26,8 @@ dbConnection();
 /* ------------------------------- middlewares ------------------------------ */
 //customError ok,swagger ok,redoc ok ,authentication,permission,query handler, notfound route
 
-//cors
-app.use(cors({
-  origin: 'http://localhost:3000', // Frontend'in çalıştığı domain
-    credentials: 'include'
-}));
+cors
+app.use(cors());
 
 app.use(express.json());
 app.use(cookieParser());

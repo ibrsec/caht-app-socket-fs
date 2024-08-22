@@ -109,10 +109,10 @@ module.exports.auth = {
 
     // JWT:
     const accessToken = jwt.sign(accessData, process.env.ACCESS_KEY, {
-      expiresIn: "30m",
+      expiresIn: "10m",
     });
     const refreshToken = jwt.sign(refreshData, process.env.REFRESH_KEY, {
-      expiresIn: "3d",
+      expiresIn: "1d",
     });
 
     generateToken(accessToken, res);
@@ -228,10 +228,10 @@ module.exports.auth = {
 
     // JWT:
     const accessToken = jwt.sign(accessData, process.env.ACCESS_KEY, {
-      expiresIn: "30m",
+      expiresIn: "10m",
     });
     const refreshToken = jwt.sign(refreshData, process.env.REFRESH_KEY, {
-      expiresIn: "3d",
+      expiresIn: "1d",
     });
 
     generateToken(accessToken, res);
@@ -374,7 +374,7 @@ module.exports.auth = {
     };
 
     const accessToken = jwt.sign(accessData, process.env.ACCESS_KEY, {
-      expiresIn: "30m",
+      expiresIn: "10m",
     });
 
     res.status(200).json({
