@@ -1,18 +1,16 @@
 "use strict";
 
 /* -------------------------------------------------------------------------- */
-/*                                 Routerindex                                */
+/*                                 Conversation router                                */
 /* -------------------------------------------------------------------------- */
 
 
 const router = require('express').Router()
+const {conversation} = require('../controllers/conversationController');
+const permission = require('../middlewares/permissions');
 /* -------------------------------------------------------------------------- */
 
-router.use('/documents',require('./documentRouter'));
-router.use('/auth',require('./authRouter'));
-router.use('/messages',require('./messageRouter'));
-router.use('/users',require('./userRouter'));
-router.use('/conversations',require('./conversationRouter'));
+router.get('/', permission.isLogin,conversation.getConversations);
 
 
 

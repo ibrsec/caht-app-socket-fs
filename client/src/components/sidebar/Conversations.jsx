@@ -5,12 +5,13 @@ import useConversationRequests from "../../services/useConversationRequests";
 import { getRandomemoji } from "../../helper/emoji";
 
 const Conversations = () => {
-  const { getConversationsApi } = useConversationRequests();
+  const { getConversationsApi,getAllConversationsApi } = useConversationRequests();
   const { conversations } = useSelector((state) => state.conv);
   console.log("conversations=", conversations);
 
   useEffect(() => {
     getConversationsApi();
+    getAllConversationsApi();
   }, []);
 
   const sortedConversations = [...conversations].sort((a, b) => {

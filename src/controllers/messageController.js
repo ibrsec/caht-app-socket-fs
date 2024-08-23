@@ -89,6 +89,7 @@ module.exports.message = {
     if (!conversation) {
       conversation = await Conversation.create({
         participants: [senderId, recieverId],
+        newMessage: true,
       });
       console.log("conversation", conversation);
     }
@@ -104,7 +105,11 @@ module.exports.message = {
       );
     }
     conversation.messages.push(newMessage._id);
+    conversation.newMessage = true;
 
+    // await Conversation.updateOne({_id: conversation?._id},
+    //   {messages: [...conversation?.messages, newMessage?._id],newMessage: true}
+    //   )
 
 
 
@@ -128,7 +133,7 @@ module.exports.message = {
     res.status(201).json({
       error: false,
       message: "A new message is sended!",
-      newMessage,
+      newMessage, 
     });
 
   },
@@ -199,6 +204,11 @@ module.exports.message = {
     }else{
       messages = conversation.messages;
     }  
+    await Conversation.updateOne({
+      participants: { $all: [senderId, recieverId] },
+    },{newMessage: false});
+
+
     res.status(200).json({
       error: false,
       message: "Messages are listed!",

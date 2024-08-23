@@ -14,9 +14,13 @@ const ConversationSchema = new mongoose.Schema(
       {
         type: mongoose.Schema.Types.ObjectId,
         ref: "Message",
-        default:[]
+        default: [],
       },
     ],
+    newMessage: {
+      type: Boolean,
+      default: true,
+    },
   },
   { collections: "conversations", timestamps: true }
 );

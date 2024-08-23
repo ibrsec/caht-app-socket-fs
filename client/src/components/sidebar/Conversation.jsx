@@ -19,8 +19,7 @@ const Conversation = ({ item, lastIndex, emoji }) => {
     const isOnline = onlineUsers?.includes(item?._id); 
 
 
-    const isNewMessageAdded = item?.isNewMessageAdded
-    console.log('from conversation',item);
+    const isNewMessageAdded = item?.isNewMessageAdded 
 
 
 

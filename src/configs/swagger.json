@@ -494,6 +494,52 @@
           }
         }
       }
+    },
+    "/api/conversations/": {
+      "get": {
+        "tags": [
+          "Conversations"
+        ],
+        "summary": "Get conversations",
+        "description": "  Get conversations </br></br>  <b>Permission= Loginned user</b></br></br>      ",
+        "parameters": [
+          {
+            "name": "authorization",
+            "in": "header",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully listed!",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "error": {
+                  "type": "boolean",
+                  "example": false
+                },
+                "message": {
+                  "type": "string",
+                  "example": "Conversations are listed"
+                },
+                "conversation": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/definitions/Conversation"
+                  }
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
+            }
+          },
+          "400": {
+            "description": "Bad request </br>   - Type of recieverId is invalid(Should be ObjectId)!</br>  - Sender is not exist in users!</br>  "
+          }
+        }
+      }
     }
   },
   "definitions": {
@@ -715,6 +761,18 @@
                 "example": [],
                 "items": {}
               }
+            }
+          }
+        },
+        "newMessage": {
+          "type": "object",
+          "properties": {
+            "type": {
+              "type": "function"
+            },
+            "default": {
+              "type": "boolean",
+              "example": true
             }
           }
         }
