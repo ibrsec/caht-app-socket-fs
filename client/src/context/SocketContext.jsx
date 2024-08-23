@@ -13,10 +13,12 @@ export const SocketContextProvider = ({ children }) => {
   const [socket, setSocket] = useState(null);
   const [onlineUsers, setOnlineUsers] = useState([]);
   const { user } = useSelector((state) => state.auth);
+  const baseurl = process.env.FRONT_HOST;
+  console.log('baseurl from front', baseurl)
 
   useEffect(() => {
     if (user) {
-      const socket = io("https://chat-app-socket-fs.onrender.com/", {
+      const socket = io("http://localhost:8000/", {
         query: {
           userId: user._id,
         },

@@ -23,7 +23,7 @@ const Messages = ({recieverId}) => {
     getMessagesApi(recieverId)
   },[recieverId])
 
-  useListenMessages();
+  useListenMessages(recieverId);
 
   return (
     <div className='px-4 flex-1 overflow-auto'>

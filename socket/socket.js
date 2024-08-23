@@ -10,7 +10,7 @@ const app = express();
 const server = http.createServer(app);
 const io = new Server(server, {
   cors: {
-    origin: "https://chat-app-socket-fs.onrender.com",
+    origin: process.env.FRONT_HOST,
     methods: ["GET", "POST"],
   },
 });
@@ -20,8 +20,8 @@ const io = new Server(server, {
 const userSocketMap = {}; //{userId:socketId}
 
 io.on("connection", (socket) => {
-  console.log("A user is connected: ", socket.id);
-
+  console.log("A user is connected: ", socket.id); 
+  
   const userId = socket.handshake.query.userId;
   if (userId !== undefined) {
     userSocketMap[userId] = socket.id;
