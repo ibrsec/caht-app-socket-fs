@@ -24,14 +24,10 @@ const conversationSlice = createSlice({
       state.conversations = state.conversations.map((conversation) => {
         let changeId = "";
 
-        payload?.filter((item) => {
-            console.log('filter participants=', item.participants)
-            console.log('filter conversation?._id', conversation?._id)
+        payload?.filter((item) => { 
             return item.participants?.includes(conversation?._id);
           })
-          .forEach((item) => {
-            console.log('forach item', item)
-            console.log('foreach conversation?._id', conversation?._id)
+          .forEach((item) => { 
             if (item.newMessage == true) {
               changeId = conversation?._id;
               return;

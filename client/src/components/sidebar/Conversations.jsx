@@ -9,8 +9,8 @@ const Conversations = () => {
   const { conversations } = useSelector((state) => state.conv);
   console.log("conversations=", conversations);
 
-  useEffect(() => {
-    getConversationsApi();
+  useEffect(async() => {
+    await getConversationsApi();
     getAllConversationsApi();
   }, []);
 
