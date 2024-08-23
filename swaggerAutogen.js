@@ -17,7 +17,7 @@ const document = {
     contact: { name: packageJson.author, email: "ibr.seckin@gmail.com" },
   },
   host: `${HOST}${process.env.NODE_ENV === 'dev' ? (":"+ PORT) : ""}`,
-  basePath: "/",
+  basePath: "/api",
   schemes: ["https", "http"],
   consumes: ["application/json"],
   produces: ["application/json"],

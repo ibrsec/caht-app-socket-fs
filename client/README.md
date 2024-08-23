@@ -5,7 +5,7 @@
 <br />
 <div align="center">
    
-  <a href="https://github.com/ibrsec/stockapp-fullstack-render/tree/main/client">
+  <a href="https://github.com/ibrsec/chat-app-socket-fs/tree/main/client">
     <img src="./public/logo.png" alt="Logo" width="250"   >
   </a>
 
@@ -16,11 +16,13 @@
     <!-- <a href="https://github.com/ibrsec/stock-app"><strong>Explore the docs »</strong></a> -->
     <br />
     <br />
-    <a href="https://stockapp-fullstack-render.onrender.com/">View Demo</a>
+    <a href="https://chat-app-socket-fs.onrender.com/">View Demo</a>
     ·
-    <a href="https://github.com/ibrsec/stockapp-fullstack-render/issues">Report Bug</a>
+    <a href="https://github.com/ibrsec/chat-app-socket-fs">Backend Repo</a>
     ·
-    <a href="https://github.com/ibrsec/stockapp-fullstack-render/issues">Request Feature</a>
+    <a href="https://github.com/ibrsec/chat-app-socket-fs/issues">Report Bug</a>
+    ·
+    <a href="https://github.com/ibrsec/chat-app-socket-fs/issues">Request Feature</a>
   </p>
 </div>
 
@@ -64,7 +66,7 @@
 <a name="about-the-project"></a>
 ## ℹ️ About The Project
 
-[![stock-app](./public/project.gif)](https://stockapp-fullstack-render.onrender.com/)
+[![stock-app](./public/project.gif)](https://chat-app-socket-fs.onrender.com/)
 
 
 
@@ -87,16 +89,19 @@
 <a name="overview"></a>
 ## 👀 Overview
 
-📦 Frontend of the my [stockapp-fullstack-render](https://github.com/ibrsec/stockapp-fullstack-render) project </br>
-🎯 Used React environment, redux toolkit,redux-persist,react-routing,material mui-x-datagrid, mui-x-charts ,axios,formik, yup, toastify, </br>
-🖥 You can Register or login with the ready credentials on the login page, Contents can be accessed after logging in! </br>
-🔩 After login there is  a few page like dashboard,products,sales,purchases,firms,brands</br>
-💪 All fields can be manage in their pages</br>
-🌱 Records of all fields can be edited, deleted or new records can be added on their own pages</br>
-🐞 Firms and Brands pages listed as cards they have edit delete and add new record features   </br>
-🏀 Information listed in tables on the Purchases, Sales, Products pages,
-They can be edited, deleted, and new records can be added. You can also make edits on table rows.  
-</br>
+📦 Frontend of the my [chat-app-socket-fs](https://github.com/ibrsec/chat-app-socket-fs) project </br></br>
+FRONTEND: 
+<b>🎯 React.js Development:</b> Built a responsive and interactive chat interface with React.js, providing a smooth user experience.
+
+<b>🛠 State Management:</b> Utilized Redux Toolkit and Persist to manage user sessions and real-time chat states efficiently.
+
+<b>🚀 Real-time Messaging:</b> Implemented real-time chat features using Socket.io, ensuring instant message delivery and updates.
+
+<b>🔔 User Notifications:</b> Added real-time notifications with Toastify notification sound to alert users of incoming messages.
+
+<b>🔍 User Search:</b> Enabled quick and efficient user search functionality to find chat contacts easily.
+
+<b>📷 Profile Picture Upload:</b> Enabled users to upload their profile pictures.
 
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
@@ -107,10 +112,10 @@ They can be edited, deleted, and new records can be added. You can also make edi
 
 ```sh
 # clone the project
-git clone https://github.com/ibrsec/stockapp-fullstack-render.git
+git clone https://github.com/ibrsec/chat-app-socket-fs.git
 
 # enter the project directory
-cd stockapp-fullstack-render
+cd chat-app-socket-fs
 
 # install dependency
 # linux
@@ -141,45 +146,35 @@ node index.js
 ## 📂 Directory structure 
 
 ```diff
-stock-app  (folder)
-  |          
-  |---public (folder) 
-  |                
-+ |---src (folder) 
-  |     |---assests (folder) 
-  |     |           
-  |     |---pages (folder)       
-  |     |           
-  |     |---components (folder) 
-  |     |    
-  |     |---app (folder)       
-  |     |     └---store.jsx       
-  |     |          
-  |     |---features (folder)       
-  |     |     |---authSlice.jsx  
-  |     |     └---stockSlice.jsx       
-  |     |          
-  |     |---router (folder)        
-  |     |     |---PrivateRoute.jsx  
-  |     |     └---AppRouter.jsx       
-  |     |          
-  |     |---services (folder)        
-  |     |     |---useAxios.jsx  
-  |     |     |---useApiRequests.jsx  
-  |     |     └---useStockRequest.jsx       
-  |     |          
-  |     |---helper (folder)        
-  |     |     └---ToastNotify.js       
-  |     |          
-  |     |---App.js 
-  |     |---Index.js
-  |     └---Index.css
-  |      
-  |----package.json
-  |----yarn.lock
-  |----tailwind.config.js
-  |----.env.local
-  └----readme.md 
++ chat-app-socket-fs/client  (folder)   
+        |---public (folder) 
+        |                
++       |---src (folder) 
+        |     |---assests (folder) 
+        |     |           
+        |     |---pages (folder)       
+        |     |           
+        |     |---components (folder) 
+        |     |    
+        |     |---app (folder) ---store.jsx      
+        |     |          
+        |     |---features (folder)(slices)        
+        |     |          
+        |     |---router (folder)         
+        |     |          
+        |     |---services (folder)              
+        |     |          
+        |     |---helper (folder)          
+        |     |          
+        |     |---App.js 
+        |     |---Index.js
+        |     └---Index.css
+        |      
+        |----package.json
+        |----package-lock.lock
+        |----tailwind.config.js 
+        └----readme.md 
+        
 ```
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
@@ -191,6 +186,7 @@ stock-app  (folder)
 
  
 <!-- https://dev.to/envoy_/150-badges-for-github-pnk  search skills-->
+
 
  <img src="https://img.shields.io/badge/HTML-239120?style=for-the-badge&logo=html5&logoColor=white">
  <img src="https://img.shields.io/badge/CSS-239120?&style=for-the-badge&logo=css3&logoColor=white&color=red"> 
@@ -204,16 +200,18 @@ stock-app  (folder)
  <img src="https://img.shields.io/badge/Redux-593D88?style=for-the-badge&logo=redux&logoColor=white"> 
  <img src="https://img.shields.io/badge/Redux Toolkit-593D88?style=for-the-badge&logo=redux&logoColor=white"> 
  <img src="https://img.shields.io/badge/Redux--Persist -593D88?style=for-the-badge&logo=redux&logoColor=white"> 
- <!-- <img src="https://img.shields.io/badge/Context API-593D88?style=for-the-badge&logo=context&logoColor=white">  -->
+ <img src="https://img.shields.io/badge/Context API-593D88?style=for-the-badge&logo=context&logoColor=white"> 
 
 
  <img src="https://img.shields.io/badge/Axios-593D88?style=for-the-badge&logo=axios&logoColor=white"> 
- <!-- <img src="https://img.shields.io/badge/Tailwind_CSS-38B2AC?style=for-the-badge&logo=tailwind-css&logoColor=white">  -->
+ <img src="https://img.shields.io/badge/Tailwind_CSS-38B2AC?style=for-the-badge&logo=tailwind-css&logoColor=white"> 
 
- <img src="https://img.shields.io/badge/Material--UI-0081CB?style=for-the-badge&logo=material-ui&logoColor=white"> 
- <img src="https://img.shields.io/badge/Formik-172B4D?style=for-the-badge&logo=formik&logoColor=white"> 
- <img src="https://img.shields.io/badge/Yup-172B4D?style=for-the-badge&logo=yup&logoColor=white"> 
- <img src="https://img.shields.io/badge/Toastify-45CC11?style=for-the-badge&logo=toastify-ui&logoColor=white"> 
+ <!-- <img src="https://img.shields.io/badge/Material--UI-0081CB?style=for-the-badge&logo=material-ui&logoColor=white">  -->
+ <!-- <img src="https://img.shields.io/badge/Formik-172B4D?style=for-the-badge&logo=formik&logoColor=white">  -->
+ <!-- <img src="https://img.shields.io/badge/Yup-172B4D?style=for-the-badge&logo=yup&logoColor=white">  -->
+ <!-- <img src="https://img.shields.io/badge/Toastify-45CC11?style=for-the-badge&logo=toastify-ui&logoColor=white">  -->
+ <img src="https://img.shields.io/badge/react_hot_toast-45CC11?style=for-the-badge&logo=react-hot-toast&logoColor=white"> 
+ <img src="https://img.shields.io/badge/socket_io_client-45CC11?style=for-the-badge&logo=socket-io&logoColor=white"> 
  
 
 

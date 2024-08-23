@@ -13,8 +13,8 @@
       "email": "ibr.seckin@gmail.com"
     }
   },
-  "host": "localhost:8000",
-  "basePath": "/",
+  "host": "chat-app-socket-fs.onrender.com",
+  "basePath": "/api",
   "schemes": [
     "https",
     "http"
@@ -523,7 +523,7 @@
                   "type": "string",
                   "example": "Conversations are listed"
                 },
-                "conversation": {
+                "conversations": {
                   "type": "array",
                   "items": {
                     "$ref": "#/definitions/Conversation"
