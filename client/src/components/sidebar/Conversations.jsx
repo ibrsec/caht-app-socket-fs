@@ -18,7 +18,7 @@ const Conversations = () => {
     return b?.isNewMessageAdded - a?.isNewMessageAdded;
   });
   return (
-    <div className="py-2 flex flex-col overflow-auto">
+    <div className="py-2 flex flex-col overflow-auto items-start">
       {
         sortedConversations?.length < 1 ?
           <>
