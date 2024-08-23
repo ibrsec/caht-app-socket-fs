@@ -16,12 +16,12 @@ const MessageContainer = () => {
 
   console.log('selectedConversation', selectedConversation)
   return (
-    <div className="md:min-w-[450px] flex flex-col">
+    <div className=" flex flex-col flex-grow ">
       {!selectedConversation ? (
         <NoChatSelected />
       ) : (
         <>
-          <div className="bg-slate-500 px-4 py-2 mb-2 relative">
+          <div className="bg-slate-500 px-4 py-3 mb-2 relative">
             <span className="label-text">To: </span>
             <span className="text-gray-900 font-bold">{selectedConversation?.username}</span>
             <button className="absolute inset-y-0 end-0 flex items-center pe-3" onClick={()=>dispatch(selectedConvRemove())}>

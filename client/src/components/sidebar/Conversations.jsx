@@ -12,19 +12,22 @@ const Conversations = () => {
   useEffect(() => {
     getConversationsApi();
   }, []);
- 
+
+  const sortedConversations = [...conversations].sort((a, b) => {
+    return b?.isNewMessageAdded - a?.isNewMessageAdded;
+  });
   return (
     <div className="py-2 flex flex-col overflow-auto">
       {
-        conversations?.length < 1 ?
+        sortedConversations?.length < 1 ?
           <>
             <p className="text-center text-sm me-3">There no user found!</p>
           </>
         :
       
-      conversations?.map((item,idx) => (
+        sortedConversations?.map((item,idx) => (
         <Conversation key={item?._id} item={item} 
-        lastIndex={idx === conversations.length - 1} emoji={getRandomemoji(idx)}/>
+        lastIndex={idx === sortedConversations.length - 1} emoji={getRandomemoji(idx)}/>
       ))}
     </div>
   );

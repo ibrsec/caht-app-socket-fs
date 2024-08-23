@@ -2,6 +2,8 @@
 import { useDispatch, useSelector } from "react-redux";
 import { selectedConvSuccess } from "../../features/conversationSlice";
 import { useSocketContext } from "../../context/SocketContext";
+import { TbMessageCircleFilled } from "react-icons/tb";
+
 
 const Conversation = ({ item, lastIndex, emoji }) => {
   const { fullName, profilePic } = item;
@@ -15,12 +17,21 @@ const Conversation = ({ item, lastIndex, emoji }) => {
 
     const {onlineUsers} = useSocketContext(); 
     const isOnline = onlineUsers?.includes(item?._id); 
+
+
+    const isNewMessageAdded = item?.isNewMessageAdded
+    console.log('from conversation',item);
+
+
+
+
+
   return (
     <div>
       <div
         className={`flex gap-2 items-center hover:bg-green-500 rounded p-2 py-1 cursor-pointer transition-all active:bg-green-600 ${
-          isSelected ? "bg-green-600" : ""
-        }`}
+          isSelected ? "bg-green-600" : isNewMessageAdded? "bg-blue-500": ""
+        }  `}
         onClick={() => dispatch(selectedConvSuccess(item))}
       >
         <div className={`avatar ${isOnline ? 'online': ''}`}>
@@ -31,7 +42,7 @@ const Conversation = ({ item, lastIndex, emoji }) => {
         <div className="flex flex-col flex-1">
           <div className="flex gap-3 justify-between">
             <p className="font-bold text-gray-200 ">{fullName}</p>
-            <span className="text-xl">{emoji}</span>
+            <span className="text-xl">{isNewMessageAdded ? <TbMessageCircleFilled style={{ color: 'green', fontSize: '24px' }}/> : emoji}</span>
           </div>
         </div>
       </div>

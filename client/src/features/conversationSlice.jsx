@@ -23,6 +23,13 @@ const conversationSlice = createSlice({
     selectedConvSuccess: (state, { payload }) => {
       // state.loading = false;
       state.selectedConversation = payload;
+      state.conversations = state.conversations.map(conversation=> {
+        if(conversation._id === payload?._id){
+          conversation.isNewMessageAdded = false;
+          return conversation;
+        }
+        return conversation;
+      })
     },
     searchActiveToggle: (state, { payload }) => {
       // state.loading = false;
@@ -31,6 +38,18 @@ const conversationSlice = createSlice({
     selectedConvRemove: (state, { payload }) => {
       // state.loading = false;
       state.selectedConversation = null;
+    },
+    newMessageAdded: (state, { payload }) => {
+      // state.loading = false; 
+      state.conversations = state.conversations.map(conversation=> {
+        if(conversation._id === payload){
+          conversation.isNewMessageAdded = true;
+          return conversation;
+        }
+        return conversation;
+      })
+
+    console.log('from convSlice',state.conversations);
     },
     successWitoutPayload: (state) => {
       state.loading = false;
@@ -69,5 +88,6 @@ export const {
   deleteConvLogout,
   selectedConvRemove,
   searchActiveToggle,
+  newMessageAdded,
 } = conversationSlice.actions;
 export default conversationSlice.reducer;

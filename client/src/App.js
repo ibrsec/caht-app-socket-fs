@@ -7,7 +7,7 @@ import { SocketContextProvider } from "./context/SocketContext";
 
 function App() {
   return (
-    <div className="App p-4 h-screen flex items-center justify-center">
+    <div className="App p-2 h-screen flex items-start pt-10 justify-center">
       <Provider store={store}>
         <PersistGate loading={null} persistor={persistor}>
           <SocketContextProvider>
